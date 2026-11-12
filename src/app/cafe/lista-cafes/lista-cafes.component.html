@@ -1,0 +1,43 @@
+<main class="container cafe-page py-4 py-md-5">
+  <header class="page-heading mb-4">
+    <h1 class="h2 mb-0">Nuestros cafés</h1>
+  </header>
+
+  <section class="summary row g-3 mb-4" aria-label="Resumen de variedades">
+    <div class="col-12 col-md-6">
+      <p class="summary-item mb-0">Variedades de café de origen: <strong>{{ origenCount }}</strong></p>
+    </div>
+    <div class="col-12 col-md-6">
+      <p class="summary-item mb-0">Variedades de café blend: <strong>{{ blendCount }}</strong></p>
+    </div>
+  </section>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    No fue posible cargar las variedades de café. Intenta recargar la página.
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle cafe-table">
+      <caption class="visually-hidden">Listado de variedades de café por nombre, tipo y región</caption>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Región</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cafe of cafes; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ cafe.nombre }}</td>
+          <td>{{ cafe.tipo }}</td>
+          <td>{{ cafe.region }}</td>
+        </tr>
+        <tr *ngIf="!cafes.length && !error">
+          <td colspan="4" class="text-center text-muted py-4">Cargando cafés…</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
